@@ -12,5 +12,6 @@ watchlist:
 
 servers:
   - host: chat.freenode.net
-    port: 6667
     channels: [ '#foo', '#test' ]
+  - host: irc.hackint.org
+    channels: [ '#bar', '#bla' ]
