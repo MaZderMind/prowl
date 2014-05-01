@@ -10,6 +10,7 @@ class ProwlPushClient < Net::IRC::Client
 
   def initialize(server, opts)
     super(server['host'], server['port'] || 6667, opts)
+    @log.info 'Connecting to '+server['host']
     @channels = server['channels']
   end
 
@@ -66,7 +67,12 @@ end
 
 opts = YAML.load_file('prowl.yaml')
 
+threads = []
 opts['servers'].each do |server|
   cli = ProwlPushClient.new(server, opts)
-  cli.start
+  threads << Thread.new { cli.start }
+end
+
+threads.each do |thread|
+  thread.join
 end
