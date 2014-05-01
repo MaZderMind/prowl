@@ -9,7 +9,7 @@ require 'net/irc'
 class ProwlPushClient < Net::IRC::Client
 
   def initialize(server, opts)
-    super(server['host'], server['port'], opts)
+    super(server['host'], server['port'] || 6667, opts)
     @channels = server['channels']
   end
 
