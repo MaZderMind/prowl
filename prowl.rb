@@ -14,6 +14,11 @@ class ProwlPushClient < Net::IRC::Client
     @channels = server['channels']
   end
 
+  # Default PING callback. Response PONG.
+  def on_ping(m)
+    post PONG, m[0]
+  end
+
   def on_rpl_welcome(m)
     @log.debug "ON_RPL_WELCOME #{m.inspect}"
     post JOIN, @channels.join(',')
