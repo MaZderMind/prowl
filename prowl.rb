@@ -25,8 +25,6 @@ class ProwlPushClient < Net::IRC::Client
   end
 
   def on_privmsg(m)
-    @log.debug "ON_PRIVMSG #{m.inspect}"
-
     # regular channel message
     #<Net::IRC::Message:0x4564064 prefix:jdrowell!~jdrowell@189-19-127-17.dsl.telesp.net.br command:PRIVMSG params:["#nosqlbr", "hi there"]>
 
