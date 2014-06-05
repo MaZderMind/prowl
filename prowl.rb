@@ -5,6 +5,7 @@
 require 'yaml'
 require 'httparty'
 require 'net/irc'
+require 'unicode'
 
 class ProwlPushClient < Net::IRC::Client
 
@@ -12,6 +13,8 @@ class ProwlPushClient < Net::IRC::Client
     super(server['host'], server['port'] || 6667, opts)
     @log.info 'Connecting to '+server['host']
     @channels = server['channels']
+
+    @opts.watchlist.map! {|word| Unicode.upcase(word) }
   end
 
   # Default PING callback. Response PONG.
@@ -34,7 +37,7 @@ class ProwlPushClient < Net::IRC::Client
     nick, user = m.prefix.split('!')
     is_public = m[0][0] == '#'
     channel = m[0] if is_public
-    msg = m[1].force_encoding('UTF-8')
+    msg = Unicode.upcase(m[1].force_encoding('UTF-8'))
 
     interesting = false
     @opts.watchlist.each do |word|

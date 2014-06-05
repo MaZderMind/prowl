@@ -7,6 +7,7 @@ GEM
     json (1.8.1)
     multi_xml (0.5.5)
     net-irc (0.0.9)
+    unicode (0.4.4.1)
 
 PLATFORMS
   ruby
@@ -14,3 +15,4 @@ PLATFORMS
 DEPENDENCIES
   httparty
   net-irc
+  unicode
